@@ -1,0 +1,65 @@
+<h1>Upload file</h1>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <label>Город:</label><br>
+    <input type="input" name="name" /><br><br>
+    <fieldset>
+        <label>Данные водителя:</label><br>
+        <div class="form-field">
+            <label>Имя</label>
+            <input class="form-control" type="input" name="name" placeholder="Имя..." />
+        </div>
+        <div class="form-field">
+            <label>Фамилия</label>
+            <input class="form-control" type="input" name="last-name" placeholder="Фамилия..." />
+        </div>
+        <div class="form-field">
+            <label>Отчество (если есть)</label>
+            <input class="form-control" type="input" name="middle-name" placeholder="Отчество (если есть)" />
+        </div>
+        <div class="form-field">
+            <input type="input" name="phone" placeholder="Телефон..." />
+            <small>Текст текст тест.</small>
+            <input class="form-control" type="input" name="phone" placeholder="Email..." />
+        </div>
+
+        <div class="form-field">
+            <label>Разворот паспорта с фото:</label><br>
+            <input class="form-control" type="file" name="filedata" />
+        </div>
+
+        <div class="form-field">
+            <label>Паспорт страница с пропиской:</label><br>
+            <input class="form-control" type="file" name="filedata" />
+        </div>
+
+        <div class="form-field">
+            <label>Лицевая сторона водительского удостоверения:</label><br>
+            <input class="form-control" type="file" name="filedata" />
+        </div>
+
+        <div class="form-field">
+            <label>Обратная сторона водительского удостоверения:</label><br>
+            <input class="form-control" type="file" name="filedata" />
+        </div>
+    </fieldset>
+
+    <div class="form-field">
+        <label>Свидетельство о регистрации ТС (сторона с НОМЕРОМ АВТОМОБИЛЯ):</label><br>
+        <input class="form-control" type="file" name="filedata" /><br><br>
+    </div>
+
+    <div class="form-field  _inline">
+        <input class="form-control" type="checkbox" id="agreetment">
+        <label for="agreetment">Lorem ipsum dolar</label>
+    </div>
+
+    <div class="form-field  _inline">
+        <input class="form-control" type="checkbox" id="offer">
+        <label for="offer">asrg wre gwretg rt</label>
+    </div>
+
+    <input class="form-control" type="submit" value="Send" />
+
+    {{status}}
+
+</form>
