@@ -1,5 +1,6 @@
 # frontend dependencies
 /node_modules
+/uploads
 /.pnp
 /.idea
 
