@@ -19,6 +19,52 @@ app.engine("html", expressHbs(
 ));
 hbs.registerPartials(__dirname + "/views/partials");
 
+/*** Old version ***/
+
+var storageConfig = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, "uploads");
+    },
+    filename: (req, file, cb) =>{
+        cb(null, file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+
+    if(file.mimetype === "image/png" ||
+        file.mimetype === "image/jpg"||
+        file.mimetype === "image/jpeg"){
+        cb(null, true);
+    }
+    else{
+        cb(null, false);
+    }
+}
+
+var upload = multer({storage:storageConfig, fileFilter: fileFilter})
+
+let cpUpload = upload.fields([
+    { name: 'passport-1' },
+    { name: 'passport-2' },
+    { name: 'driver_licence-1' },
+    { name: 'driver_licence-2' },
+    { name: 'car_registration' },
+])
+
+app.post('/upload', cpUpload, function (req, res, next) {
+    let files = req.files;
+    let error = '';
+    console.log(files);
+    if(!files)
+        status = "Ошибка при загрузке файла";
+    else
+        status = "Файл загружен";
+
+    res.send(status);
+
+});
+
 app.get('/info', function (req, res) {
     res.render("info.html", {
         title: "Мои контакты",
@@ -34,22 +80,6 @@ app.get('/admin', function (req, res) {
         phone: "+1234567890"
     })
 });
-
-// app.use('/static', express.static(path.join(__dirname, 'public')));
-app.use(multer({dest:"uploads"}).single("filedata"));
-
-app.post("/upload", function (req, res, next) {
-    let filedata = req.file;
-    let error = '';
-    console.log(filedata);
-    if(!filedata)
-        status = "Ошибка при загрузке файла";
-    else
-        status = "Файл загружен";
-
-    res.send(status);
-});
-
 
 app.get('/', function (req, res) {
     res.render('home.html')
