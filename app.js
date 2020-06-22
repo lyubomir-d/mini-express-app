@@ -1,13 +1,32 @@
 const express = require("express");
+const app = express();
+const port = process.env.PORT || 5000;
+const connect = require('connect');
+const serveStatic = require('serve-static');
+const http = require('http');
+
 const hbs = require("hbs");
 const multer  = require("multer");
 const expressHbs = require("express-handlebars");
 
+
+const sassMiddleware = require('node-sass-middleware');
+const srcPath = __dirname + '/scss';
+const destPath = __dirname + '/public/styles';
+
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-const app = express();
-const port = 5000;
+
+app.use('/styles', sassMiddleware({
+    src: srcPath,
+    dest: destPath,
+    debug: true,
+    outputStyle: 'expanded'
+}));
+app.use('/',
+    serveStatic('./public', {})
+);
 
 app.set("view engine", "html");
 app.engine("html", expressHbs(
@@ -18,8 +37,6 @@ app.engine("html", expressHbs(
     }
 ));
 hbs.registerPartials(__dirname + "/views/partials");
-
-/*** Old version ***/
 
 var storageConfig = multer.diskStorage({
     destination: (req, file, cb) =>{
@@ -85,4 +102,9 @@ app.get('/', function (req, res) {
     res.render('home.html')
 });
 
+// app.use('/public', express.static(path.join(__dirname, 'public')));
+
 app.listen(port, () => console.log(`Express test app listening at http://localhost:${port}`))
+console.log('Server listening on port ' + port);
+console.log('srcPath is ' + srcPath);
+console.log('destPath is ' + destPath);
