@@ -1,6 +1,10 @@
 input {
-  border: 2px solid yellow;
   border-radius: 5px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
 }
 
 html {

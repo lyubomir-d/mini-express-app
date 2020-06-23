@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 const connect = require('connect');
 const serveStatic = require('serve-static');
 const http = require('http');
@@ -14,9 +14,16 @@ const sassMiddleware = require('node-sass-middleware');
 const srcPath = __dirname + '/scss';
 const destPath = __dirname + '/public/styles';
 
-const { body,validationResult } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
+// const { body,validationResult } = require('express-validator/check');
+// const { sanitizeBody } = require('express-validator/filter');
 
+// const connectDB = require('./config/db');
+
+// Connect Database
+// connectDB();
+
+// Init Middleware
+app.use(express.json({ extended: false }));
 
 app.use('/styles', sassMiddleware({
     src: srcPath,
@@ -99,12 +106,9 @@ app.get('/admin', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-    res.render('home.html')
+    res.render('home/home.html')
 });
 
 // app.use('/public', express.static(path.join(__dirname, 'public')));
 
-app.listen(port, () => console.log(`Express test app listening at http://localhost:${port}`))
-console.log('Server listening on port ' + port);
-console.log('srcPath is ' + srcPath);
-console.log('destPath is ' + destPath);
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
