@@ -16,9 +16,9 @@ const destPath = __dirname + '/public/styles';
 
 // const { body,validationResult } = require('express-validator/check');
 // const { sanitizeBody } = require('express-validator/filter');
-
+//
 // const connectDB = require('./config/db');
-
+//
 // Connect Database
 // connectDB();
 
